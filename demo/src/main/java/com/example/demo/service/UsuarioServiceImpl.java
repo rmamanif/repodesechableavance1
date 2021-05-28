@@ -38,12 +38,16 @@ public class UsuarioServiceImpl implements UsuarioService {
 		this.usuarioRepository = usuarioRepository;
 	}
 
+	//localhost:8050/usuarios
+	//POST --> INSERTAR
 	@PostMapping
 	public ResponseEntity create(@RequestBody Usuario usuario) throws URISyntaxException {
 		Usuario usuario_new=usuarioRepository.save(usuario);
 		return ResponseEntity.ok(usuario_new);
 	}
 	
+	//localhost:8050/usuarios/{id}
+	//PUT --> ACTUALIZAR
 	@PutMapping(value = "/{id}")
 	public ResponseEntity<Usuario> update(@PathVariable("id") Long id, @RequestBody Usuario usuario) {
 		
@@ -60,19 +64,29 @@ public class UsuarioServiceImpl implements UsuarioService {
 				}).orElse(ResponseEntity.notFound().build());
 	}
 	
-
+	
+	
+	
+	//localhost:8050/usuarios/{id}
+	//DELETE --> ELIMINAR
 	@DeleteMapping("/{id}")
 	public ResponseEntity delete(@PathVariable Long id) {
 		usuarioRepository.deleteById(id);
 		return ResponseEntity.ok().build();
 	}
-
+	
+	
+	//READ --> LEER
+	//localhost:8050/usuarios/{id}
 	@GetMapping("/{id}")
 	public Usuario getClient(@PathVariable long id) throws UsuarioNotFoundException {
 		return usuarioRepository.findById(id).orElseThrow(RuntimeException:: new);
 	}
-
-	@GetMapping
+	
+	
+	//READ --> LEER
+	//localhost:8050/usuarios/users
+	@GetMapping("/users")
 	public Iterable<Usuario> findAll() {
 		return usuarioRepository.findAll();
 	}

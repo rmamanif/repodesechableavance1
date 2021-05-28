@@ -10,4 +10,12 @@ import org.springframework.stereotype.Repository;
 public interface UsuarioRepository
 	extends JpaRepository<Usuario, Long>{
 		
+	//Fetch user by id
+	List<Usuario> findById(String id);
+	
+	//Fetch user by name
+	List<Usuario> findByNombre(String nombre);
+	
+	//Fetch user by last_name
+	List<Usuario> findByApellido (String apellido);
 }
