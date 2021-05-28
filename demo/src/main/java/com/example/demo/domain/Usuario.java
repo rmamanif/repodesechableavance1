@@ -1,11 +1,18 @@
 package com.example.demo.domain;
 
+import java.util.ArrayList;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import antlr.collections.List;
 
 @Entity
 @Table(name="usuario")
@@ -28,6 +35,12 @@ public class Usuario {
 	private String celular;
 	@Column(name ="token")
 	private String token;
+	
+	
+	
+	@OneToMany(cascade = CascadeType.ALL)
+	@JoinColumn( name = "usuario_id", referencedColumnName = "id" )
+	List<Solicitudes> solicitudes = new ArrayList<>();
 	
 	public Usuario() {
 		super();
